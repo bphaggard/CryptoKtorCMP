@@ -1,5 +1,6 @@
 package org.example.project.ktorapitestcmp.presentation
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
@@ -33,14 +34,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import ktorapitestcmp.composeapp.generated.resources.Res
+import ktorapitestcmp.composeapp.generated.resources._inch
+import ktorapitestcmp.composeapp.generated.resources.ada
+import ktorapitestcmp.composeapp.generated.resources.compose_multiplatform
 import org.example.project.ktorapitestcmp.HomeViewModel
 import org.example.project.ktorapitestcmp.navigation.Screen
 import org.example.project.ktorapitestcmp.ui.theme.KtorDark
 import org.example.project.ktorapitestcmp.ui.theme.KtorLight
 import org.example.project.ktorapitestcmp.util.DisplayFormattedNumber
 import org.example.project.ktorapitestcmp.util.GetBebasFontFamily
+import org.jetbrains.compose.resources.painterResource
 import kotlin.math.floor
-import kotlin.math.round
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,9 +62,10 @@ fun DetailScreen(
             topBar = {
                 CenterAlignedTopAppBar(
                     title = {
-//                        Text(
-//                            text = coin?.name ?: "Coin Details",
-//                            fontFamily = GetBebasFontFamily())
+                        Text(
+                            text = coin?.name ?: "Coin Details",
+                            fontFamily = GetBebasFontFamily(),
+                            fontSize = 30.sp)
                             },
                     navigationIcon = {
                         IconButton(onClick = { navController.popBackStack(Screen.Main.route, inclusive = false) }) {
@@ -68,7 +74,8 @@ fun DetailScreen(
                                 "backIcon",
                                 modifier = Modifier.background(
                                     shape = CircleShape,
-                                    color = MaterialTheme.colorScheme.surfaceDim)
+                                    color = MaterialTheme.colorScheme.secondary),
+                                tint = MaterialTheme.colorScheme.onSecondary
                             )
                         }
                     },
@@ -76,7 +83,7 @@ fun DetailScreen(
                         containerColor = Color.Transparent)
                 )
             },
-            containerColor = MaterialTheme.colorScheme.background,
+            containerColor = MaterialTheme.colorScheme.surfaceDim,
             content = { innerPadding ->
                 Column(
                     modifier = Modifier
@@ -84,20 +91,12 @@ fun DetailScreen(
                         .padding(innerPadding),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    coin?.let {
-                        Text(
-                            it.name,
-                            fontFamily = GetBebasFontFamily(),
-                            fontSize = 30.sp
-                        )
-                    }
-                    Spacer(Modifier.padding(8.dp))
                     Card(
                         modifier = Modifier
                             .wrapContentHeight()
                             .fillMaxWidth(0.9f),
                         shape = RoundedCornerShape(20.dp),
-                        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surfaceDim)
+                        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondary)
                     ){
                         Column(
                             modifier = Modifier
