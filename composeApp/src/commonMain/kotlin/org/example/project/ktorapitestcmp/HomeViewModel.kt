@@ -17,9 +17,18 @@ class HomeViewModel: ViewModel() {
         fetchCoins()
     }
 
-    private fun fetchCoins() {
+    fun fetchCoins() {
         viewModelScope.launch {
-            _coins.value = getCryptoCurrencyApi()
+            try {
+                val fetchedCoins = getCryptoCurrencyApi() // Calls your API function
+                _coins.value = fetchedCoins // Updates the StateFlow with new data
+            } catch (e: Exception) {
+                println("HomeViewModel\", \"Error fetching coins: ${e.message}")
+            }
         }
+    }
+
+    fun getCoinById(coinId: String): CryptoCurrency? {
+        return coins.value.find { it.id == coinId }
     }
 }
