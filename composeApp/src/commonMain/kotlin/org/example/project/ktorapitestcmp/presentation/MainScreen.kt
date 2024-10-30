@@ -35,6 +35,9 @@ import androidx.navigation.NavController
 import ktorapitestcmp.composeapp.generated.resources.Res
 import ktorapitestcmp.composeapp.generated.resources.blockchain
 import ktorapitestcmp.composeapp.generated.resources.btc
+import ktorapitestcmp.composeapp.generated.resources.cancel
+import ktorapitestcmp.composeapp.generated.resources.cross
+import ktorapitestcmp.composeapp.generated.resources.question
 import org.example.project.ktorapitestcmp.HomeViewModel
 import org.example.project.ktorapitestcmp.data.CryptoCurrency
 import org.example.project.ktorapitestcmp.navigation.Screen
@@ -43,6 +46,8 @@ import org.example.project.ktorapitestcmp.ui.theme.KtorLight
 import org.example.project.ktorapitestcmp.util.GetBebasFontFamily
 import org.example.project.ktorapitestcmp.util.GetDancingRegularFamily
 import org.example.project.ktorapitestcmp.util.GetOswaldFontLightFamily
+import org.example.project.ktorapitestcmp.util.cryptoNameToImageMap
+import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -62,11 +67,10 @@ fun MainScreen(
         ) {
             Card(
                 modifier = Modifier
-                    .fillMaxHeight(0.3f)
+                    .height(300.dp)
                     .fillMaxWidth(),
                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondary),
-                shape = RoundedCornerShape(bottomStart = 40.dp, bottomEnd = 40.dp),
-                //elevation = CardDefaults.cardElevation(defaultElevation = 20.dp)
+                shape = RoundedCornerShape(bottomStart = 40.dp, bottomEnd = 40.dp)
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -90,7 +94,13 @@ fun MainScreen(
                             )
                             Spacer(modifier = Modifier.padding(5.dp))
                             Text(
-                                text = "infos about crypto assets",
+                                text = "crypto prices by market cap",
+                                fontFamily = GetDancingRegularFamily(),
+                                fontWeight = FontWeight.Normal,
+                                fontSize = 20.sp
+                            )
+                            Text(
+                                text = "from coincap.io",
                                 fontFamily = GetDancingRegularFamily(),
                                 fontWeight = FontWeight.Normal,
                                 fontSize = 20.sp
@@ -103,7 +113,9 @@ fun MainScreen(
             Text(
                 text = "choose cryptocurrency",
                 fontFamily = GetBebasFontFamily(),
-                fontSize = 26.sp)
+                fontSize = 26.sp,
+                color = MaterialTheme.colorScheme.onSurface
+            )
             Spacer(modifier = Modifier.height(20.dp))
             LazyColumn(
                 modifier = Modifier
@@ -112,8 +124,10 @@ fun MainScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 items(coins) { coin ->
+                    val cryptoImage = cryptoNameToImageMap[coin.id]?: Res.drawable.cancel
                     AssetRow(
                         asset = coin,
+                        image = cryptoImage,
                         onClick = {navController.navigate("${Screen.Detail.route}/${coin.id}")}
                     )
                     Spacer(modifier = Modifier.height(16.dp))
@@ -126,6 +140,7 @@ fun MainScreen(
 @Composable
 fun AssetRow(
     asset: CryptoCurrency,
+    image: DrawableResource,
     onClick: () -> Unit
 ) {
 
@@ -151,13 +166,8 @@ fun AssetRow(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-//                Text(
-//                    text = "#${asset.rank}",
-//                    fontFamily = GetOswaldFontLightFamily(),
-//                    fontSize = 20.sp
-//                )
                 Image(
-                    painterResource(Res.drawable.btc),
+                    painterResource(image),
                     null,
                     modifier = Modifier.size(60.dp)
                 )

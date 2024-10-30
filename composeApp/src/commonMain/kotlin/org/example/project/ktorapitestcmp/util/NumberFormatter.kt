@@ -8,7 +8,7 @@ fun DisplayFormattedNumber(number: String): String {
     val formattedNumber = number.let {
         if (it.contains(".")) {
             val integerPart = it.substringBefore(".")
-            val decimalPart = it.substringAfter(".").take(2)
+            val decimalPart = it.substringAfter(".").take(3)
             "$integerPart.$decimalPart"
         } else {
             it // If there is no decimal part, return as is

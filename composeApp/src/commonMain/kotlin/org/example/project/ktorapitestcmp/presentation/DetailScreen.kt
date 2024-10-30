@@ -1,6 +1,5 @@
 package org.example.project.ktorapitestcmp.presentation
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
@@ -34,17 +33,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import ktorapitestcmp.composeapp.generated.resources.Res
-import ktorapitestcmp.composeapp.generated.resources._inch
-import ktorapitestcmp.composeapp.generated.resources.ada
-import ktorapitestcmp.composeapp.generated.resources.compose_multiplatform
 import org.example.project.ktorapitestcmp.HomeViewModel
 import org.example.project.ktorapitestcmp.navigation.Screen
 import org.example.project.ktorapitestcmp.ui.theme.KtorDark
 import org.example.project.ktorapitestcmp.ui.theme.KtorLight
 import org.example.project.ktorapitestcmp.util.DisplayFormattedNumber
 import org.example.project.ktorapitestcmp.util.GetBebasFontFamily
-import org.jetbrains.compose.resources.painterResource
 import kotlin.math.floor
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -110,6 +104,7 @@ fun DetailScreen(
                                     style = MaterialTheme.typography.bodyLarge
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
+                                Text(text = "Rank: #${it.rank}")
                                 Text(text = "Symbol: ${it.symbol}")
                                 Text(
                                     text = "Price: $${DisplayFormattedNumber(it.priceUsd)}",
