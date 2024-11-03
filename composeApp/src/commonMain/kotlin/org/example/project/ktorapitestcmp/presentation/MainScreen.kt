@@ -67,7 +67,7 @@ fun MainScreen(
         ) {
             Card(
                 modifier = Modifier
-                    .height(300.dp)
+                    .fillMaxHeight(0.3f)
                     .fillMaxWidth(),
                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondary),
                 shape = RoundedCornerShape(bottomStart = 40.dp, bottomEnd = 40.dp)
@@ -109,7 +109,7 @@ fun MainScreen(
                     }
                 }
             }
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(30.dp))
             Text(
                 text = "choose cryptocurrency",
                 fontFamily = GetBebasFontFamily(),
