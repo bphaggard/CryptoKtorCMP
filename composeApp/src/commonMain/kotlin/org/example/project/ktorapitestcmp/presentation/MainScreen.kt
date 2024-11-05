@@ -2,7 +2,6 @@ package org.example.project.ktorapitestcmp.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,26 +26,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import ktorapitestcmp.composeapp.generated.resources.Res
 import ktorapitestcmp.composeapp.generated.resources.blockchain
-import ktorapitestcmp.composeapp.generated.resources.btc
 import ktorapitestcmp.composeapp.generated.resources.cancel
-import ktorapitestcmp.composeapp.generated.resources.cross
-import ktorapitestcmp.composeapp.generated.resources.question
 import org.example.project.ktorapitestcmp.HomeViewModel
-import org.example.project.ktorapitestcmp.data.CryptoCurrency
 import org.example.project.ktorapitestcmp.navigation.Screen
+import org.example.project.ktorapitestcmp.presentation.parts.AssetRow
 import org.example.project.ktorapitestcmp.ui.theme.KtorDark
 import org.example.project.ktorapitestcmp.ui.theme.KtorLight
 import org.example.project.ktorapitestcmp.util.GetBebasFontFamily
 import org.example.project.ktorapitestcmp.util.GetDancingRegularFamily
-import org.example.project.ktorapitestcmp.util.GetOswaldFontLightFamily
 import org.example.project.ktorapitestcmp.util.cryptoNameToImageMap
-import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
@@ -132,60 +124,6 @@ fun MainScreen(
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                 }
-            }
-        }
-    }
-}
-
-@Composable
-fun AssetRow(
-    asset: CryptoCurrency,
-    image: DrawableResource,
-    onClick: () -> Unit
-) {
-
-    Card(
-        modifier = Modifier
-            .height(80.dp)
-            .fillMaxWidth(0.9f)
-            .clickable { onClick() },
-        shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.secondary),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Spacer(Modifier.padding(5.dp))
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth(0.15f),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Image(
-                    painterResource(image),
-                    null,
-                    modifier = Modifier.size(60.dp)
-                )
-            }
-            Spacer(Modifier.padding(5.dp))
-            Column(
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .fillMaxWidth(0.85f),
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = asset.name,
-                    fontFamily = GetOswaldFontLightFamily(),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    fontSize = 26.sp
-                )
             }
         }
     }
